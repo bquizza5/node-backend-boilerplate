@@ -1,24 +1,43 @@
 
 exports.up = function(knex) {
   return knex.schema
-    .createTable('items', items => {
-      items.increments();
-      items
-        .string('name', 255)
+    .createTable('users', user => {
+      user.increments();
+      user
+        .string("username")
         .notNullable()
-        .unique();
-      items
-        .text('description').notNullable();
-      items
-        .string('category').notNullable();
-      items
-        .text('image');
-      items
-        .timestamps(); // will create two columns: created_at, updated_at
+        .unique()
+        user
+        .string("password")
+        .notNullable()
+      user
+        .string('first_name', 255)
+        .notNullable()
+      user
+        .string('last_name', 255)
+        .notNullable()
+      user
+        .text('position').notNullable();
+    })
+    .createTable('tasks', task => {
+      task.increments();
+      task
+        .string('name')
+        .notNullable()
+      task
+        .string('description')
+        .notNullable()
+      task
+        .integer('user_id')
+        .unsigned()
+        .notNullable()
+        .references("id")
+        .inTable("users")
     })
 };
 
 exports.down = function(knex, Promise) {
   return knex.schema
-    .dropTableIfExists('items')
+    .dropTableIfExists('tasks')
+    .dropTableIfExists('users')
 };
