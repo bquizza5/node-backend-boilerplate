@@ -35,6 +35,7 @@ router.post('/', validateCookie, (req, res) => {
   user.password = bcrypt.hashSync("password", 12)
   users.add(user)
     .then(id => {
+      console.log(id)
       [newuserId] = id
       return users.findById(newuserId)
     })
@@ -42,7 +43,7 @@ router.post('/', validateCookie, (req, res) => {
       res.status(201).json({ message: 'Successfully added the user.', user})
     })
     .catch(err => {
-      res.status(500).json({ message: 'Error adding the user.' })
+      res.status(500).json({ message: err })
     })
 })
 
@@ -73,3 +74,24 @@ router.delete('/:id', validateCookie, (req, res) => {
 })
 
 module.exports = router;
+
+
+/*
+        _=====_                               _=====_
+       / _____ \                             / _____ \
+     +.-'_____'-.---------------------------.-'_____'-.+
+    /   |     |  '.        S O N Y        .'  |  _  |   \
+   / ___| /|\ |___ \                     / ___| /_\ |___ \
+  / |      |      | ;  __           _   ; | _         _ | ;
+  | | <---   ---> | | |__|         |_:> | ||_|       (_)| |
+  | |___   |   ___| ;SELECT       START ; |___       ___| ;
+  |\    | \|/ |    /  _     ___      _   \    | (X) |    /|
+  | \   |_____|  .','" "', |___|  ,'" "', '.  |_____|  .' |
+  |  '-.______.-' /       \ANALOG/       \  '-._____.-'   |
+  |               |       |------|       |                |
+  |              /\       /      \       /\               |
+  |             /  '.___.'        '.___.'  \              |
+  |            /                            \             |
+   \          /                              \           /
+    \________/                                \_________/
+*/

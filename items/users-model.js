@@ -18,7 +18,6 @@ function findById(id) {
 }
 
 function findByUsername(username) {
-  console.log(username)
   return db('users').where('username', username).first()
 }
 
@@ -27,8 +26,6 @@ function add(user) {
 }
 
 function edit(id, user) {
-  user.first_name = "alpha"
-  console.log(user)
   return db('users').update(user).where('id', id)
 }
 
