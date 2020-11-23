@@ -2,9 +2,6 @@ const router = require('express').Router();
 const bcrypt = require("bcryptjs")
 const tasks = require('./tasks-model.js');
 const {
-  validateTaskId,
-  validateUserId,
-  validatePostReqBody,
   validateCookie
 } = require('../api/middleware.js')
 
@@ -19,7 +16,7 @@ router.get('/', (req, res) => {
     })
 })
 
-router.get('/:id', validateCookie, (req, res) => {
+router.get('/:id', (req, res) => {
   const id = req.params.id
   tasks.findById(id)
     .then(task => {
@@ -31,7 +28,7 @@ router.get('/:id', validateCookie, (req, res) => {
     })
 })
 
-router.get('/user/:id', validateCookie, (req, res) => {
+router.get('/user/:id', (req, res) => {
   const id = req.params.id
   tasks.findAll(id)
     .then(task => {
@@ -43,7 +40,7 @@ router.get('/user/:id', validateCookie, (req, res) => {
     })
 })
 
-router.post('/', validateCookie, (req, res) => {
+router.post('/', (req, res) => {
   const task = req.body
   tasks.add(task)
     .then(id => {
@@ -58,7 +55,7 @@ router.post('/', validateCookie, (req, res) => {
     })
 })
 
-router.put('/:id', validateCookie, (req, res) => {
+router.put('/:id', (req, res) => {
   const id = req.params.id
   const updated = req.body
   tasks.edit(id, updated)
@@ -73,7 +70,7 @@ router.put('/:id', validateCookie, (req, res) => {
     })
 })
 
-router.delete('/:id', validateCookie, (req, res) => {
+router.delete('/:id', (req, res) => {
   const id = req.params.id
   tasks.remove(id)
     .then(deleted => {

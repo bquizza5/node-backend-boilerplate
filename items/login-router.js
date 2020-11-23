@@ -25,7 +25,7 @@ router.post('/', (req, res) => {
 
 })
 
-router.post('/updatePassword', validateCookie, (req, res) => {
+router.post('/updatePassword', (req, res) => {
   let newUser = {...req.session.user, password: bcrypt.hashSync(req.body.password, 12)}
   users.edit(req.session.user.id, newUser)
   .then( user => {

@@ -14,6 +14,7 @@ function find() {
 }
 
 function findById(id) {
+  console.log("Hit findById")
   return db('users').where('id', id).first()
 }
 

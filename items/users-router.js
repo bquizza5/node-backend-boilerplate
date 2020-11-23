@@ -7,7 +7,7 @@ const {
   validateCookie
 } = require('../api/middleware.js')
 
-router.get('/', validateCookie, (req, res) => {
+router.get('/', (req, res) => {
   users.find()
     .then(users => {
       res.status(200).json(users)
@@ -18,7 +18,7 @@ router.get('/', validateCookie, (req, res) => {
     })
 })
 
-router.get('/:id', validateCookie, (req, res) => {
+router.get('/:id', (req, res) => {
   const id = req.params.id
   users.findById(id)
     .then(user => {
@@ -30,7 +30,7 @@ router.get('/:id', validateCookie, (req, res) => {
     })
 })
 
-router.post('/', validateCookie, (req, res) => {
+router.post('/', (req, res) => {
   const user = req.body
   user.password = bcrypt.hashSync("password", 12)
   users.add(user)
@@ -47,7 +47,7 @@ router.post('/', validateCookie, (req, res) => {
     })
 })
 
-router.put('/:id', validateCookie, (req, res) => {
+router.put('/:id', (req, res) => {
   const id = req.params.id
   const updated = req.body
   users.edit(id, updated)
@@ -62,7 +62,7 @@ router.put('/:id', validateCookie, (req, res) => {
     })
 })
 
-router.delete('/:id', validateCookie, (req, res) => {
+router.delete('/:id', (req, res) => {
   const id = req.params.id
   users.remove(id)
     .then(deleted => {
