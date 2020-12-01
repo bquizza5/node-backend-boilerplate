@@ -42,7 +42,7 @@ router.get('/user/:id', (req, res) => {
 
 router.post('/', (req, res) => {
   const task = req.body
-  tasks.add(task)
+  tasks.add({...task, completed: 0})
     .then(id => {
       [newtaskId] = id
       return tasks.findById(newtaskId)
