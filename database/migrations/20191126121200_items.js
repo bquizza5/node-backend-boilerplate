@@ -28,6 +28,9 @@ exports.up = function(knex) {
         .string('description')
         .notNullable()
       task
+        .integer('completed')
+        .notNullable()
+      task
         .integer('user_id')
         .unsigned()
         .notNullable()
