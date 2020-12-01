@@ -6,7 +6,8 @@ module.exports = {
   findById,
   add,
   edit,
-  remove
+  remove,
+  markComplete
 }
 
 function find() {
@@ -27,6 +28,10 @@ function add(task) {
 
 function edit(id, task) {
   return db('tasks').update(task).where('id', id)
+}
+
+function markComplete(id) {
+  return db('tasks').update({'completed': 1}).where('id', id)
 }
 
 function remove(id) {

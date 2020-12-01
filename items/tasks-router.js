@@ -57,8 +57,7 @@ router.post('/', (req, res) => {
 
 router.put('/:id', (req, res) => {
   const id = req.params.id
-  const updated = req.body
-  tasks.edit(id, updated)
+  tasks.markComplete(id)
     .then(updatedtaskId => {
       return tasks.findById(updatedtaskId)
     })
@@ -66,7 +65,7 @@ router.put('/:id', (req, res) => {
       res.status(201).json(updated)
     })
     .catch(err => {
-      res.status(500).json({ message: 'Error updating the task.' })
+      res.status(500).json({ message: err })
     })
 })
 
